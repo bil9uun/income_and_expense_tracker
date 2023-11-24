@@ -23,7 +23,7 @@ const RecordsMenu = () => {
       <h1 className="font-semibold text-2xl mb-6">Records</h1>
       <button
         className="btn btn-primary rounded-full text-white mb-6"
-        onClick={() => document.getElementById("my_modal_3").showModal()}
+        onClick={() => document.getElementById("my_modal").showModal()}
       >
         <Plus color="white" />
         Add
