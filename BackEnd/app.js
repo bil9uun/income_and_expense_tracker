@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
-const { sql } = require("./config/pgDb");
+const authRoutes = require("./Routes/authRoutes");
+const imageRoutes = require("./Routes/imageRoutes");
 
 const PORT = process.env.PORT;
 const app = express();
@@ -9,14 +10,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", async (req, res) => {
-  try {
-    const result = await sql`SELECT * FROM employee LIMIT(5)`;
-    console.log("Result", { result });
-  } catch (error) {
-    res.send("Aldaa garlaa dahin oroldono uu" + error);
-  }
-  res.send("Hi");
-});
+//authentication
+app.use("/auth", authRoutes);
+
+app.use("/api/images", imageRoutes);
 
 app.listen(PORT, () => console.log(`Server is listening at ${PORT} port`));
