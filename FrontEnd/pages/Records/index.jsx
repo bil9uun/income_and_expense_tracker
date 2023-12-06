@@ -2,7 +2,7 @@ import React from "react";
 
 import Navbar from "@/components/Navbar";
 import RecordsMenu from "@/components/RecordsMenu";
-import RecordsContainer from "@/components/RecordsContianer";
+import RecordsContainer from "@/components/RecordsContainer";
 
 const Records = () => {
   return (

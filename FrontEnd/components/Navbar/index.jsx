@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import Logo from "../svg/Logo";
 import Plus from "../svg/Plus";
+import ProfileModal from "../ProfileModal";
 
 const Navbar = () => {
   const Router = useRouter();
@@ -48,16 +49,23 @@ const Navbar = () => {
             className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
           >
             <li>
-              <a className="justify-between">
+              <button
+                className="justify-between"
+                onClick={() =>
+                  document.getElementById("my_modal_profile").showModal()
+                }
+              >
                 Profile
-                <span className="badge">New</span>
-              </a>
+              </button>
+              <div>
+                <ProfileModal />
+              </div>
             </li>
             <li>
-              <a>Settings</a>
+              <button>Settings</button>
             </li>
             <li>
-              <a>Logout</a>
+              <button>Logout</button>
             </li>
           </ul>
         </div>
