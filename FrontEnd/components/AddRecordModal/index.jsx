@@ -115,6 +115,7 @@ const AddRecordModal = () => {
               </div>
               <div>
                 <h1>Date</h1>
+                <input type="date" className="input input-bordered" />
               </div>
             </div>
             <button className="btn border-0 bg-primary w-full rounded-full text-white">
