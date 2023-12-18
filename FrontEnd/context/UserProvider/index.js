@@ -50,6 +50,36 @@ const UserProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
   };
+  const signup = async () => {
+    if (
+      !formUserData.email ||
+      !formUserData.password ||
+      !formUserData.rePassword ||
+      !formUserData.name
+    ) {
+      alert("Хоосон талбаруууд байж болохгүй");
+      return;
+    }
+
+    if (formUserData.password !== formUserData.rePassword) {
+      alert("Нууц үг хоорондоо тохирохгүй байна.");
+      return;
+    }
+
+    try {
+      const { data } = await axios.post("http://localhost:8008/auth/signup", {
+        email: formUserData.email,
+        password: formUserData.password,
+        name: formUserData.name,
+      });
+      console.log(data);
+      setUser(data.user);
+      router.push("/step-one");
+    } catch (error) {
+      console.log(error);
+      toast.error(`${error.message}`, { autoClose: 3000 });
+    }
+  };
 
   return (
     <UserContext.Provider

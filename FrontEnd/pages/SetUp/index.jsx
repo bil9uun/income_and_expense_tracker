@@ -1,8 +1,8 @@
 import React from "react";
 
-import StepOne from "@/components/LogIn/StepOne";
-import StepTwo from "@/components/LogIn/StepTwo";
-import StepThree from "@/components/LogIn/StepThree";
+import StepOne from "@/pages/StepOne";
+import StepTwo from "@/pages/StepTwo";
+import StepThree from "@/pages/StepThree";
 import StepsContainer from "@/components/LogIn/StepsContainer";
 import Logo from "@/components/svg/Logo";
 import Geld from "@/components/svg/Geld";

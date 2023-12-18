@@ -3,9 +3,13 @@ import { useRouter } from "next/router";
 
 import Logo from "@/components/svg/Logo";
 import Geld from "@/components/svg/Geld";
+import { useEffect } from "react";
 
 const SignUp = () => {
-  const Router = useRouter();
+  const router = useRouter();
+  const routepusher = () => {
+    router.push("/StepOne");
+  };
   return (
     <div className=" bg-white w-screen h-screen flex">
       <div className="flex flex-1 w-full h-full justify-center items-center">
@@ -51,7 +55,12 @@ const SignUp = () => {
             />
           </div>
           <div className="mb-10">
-            <button class="btn btn-info w-full rounded-3xl text-white bg-[#0166FF]">
+            <button
+              onClick={() => {
+                routepusher();
+              }}
+              class="btn btn-info w-full rounded-3xl text-white bg-[#0166FF]"
+            >
               Sign Up
             </button>
           </div>

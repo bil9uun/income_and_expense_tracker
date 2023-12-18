@@ -3,7 +3,17 @@ import React from "react";
 import Money from "@/components/svg/Money";
 import StepTwo from "../StepTwo";
 
+import { useRouter } from "next/router";
+import { StepContext } from "@/context/StepContext";
+import { useContext } from "react";
+
 const StepOne = () => {
+  const { changeStepData } = useContext(StepContext);
+  const router = useRouter();
+  const routepusher = () => {
+    router.push("/StepTwo");
+  };
+
   return (
     <div className=" w-96 h-80 bg-white flex flex-col justify-center items-center">
       <div className=" flex flex-col justify-center items-center mb-6">
@@ -15,14 +25,23 @@ const StepOne = () => {
         </h1>
       </div>
       <div className="flex justify-center items-center w-full mb-3">
-        <select className="select select-bordered w-full bg-[#F3F4F6] border-[#D1D5DB] text-black font-semibold">
-          <option selected>MNT - Mongolian Tugrik</option>
-          <option>USD - United States Dollar</option>
-          <option>RUB - Russian Ruble</option>
-          <option>CNY - Chinese Yuan</option>
-          <option>AUD - Australian Dollar</option>
-          <option>KRW - South Korean Won</option>
-          <option>JPY - Japanese yen</option>
+        <select
+          className="select select-bordered w-full bg-[#F3F4F6] border-[#D1D5DB] text-black font-semibold"
+          onChange={(e) => {
+            console.log(e.target.name);
+            console.log(e.target.value);
+            changeStepData(e.target.name, e.target.value);
+          }}
+        >
+          <option value="MNT" selected>
+            MNT - Mongolian Tugrik
+          </option>
+          <option value="USD">USD - United States Dollar</option>
+          <option value="RUB">RUB - Russian Ruble</option>
+          <option value="CNY">CNY - Chinese Yuan</option>
+          <option value="AUD">AUD - Australian Dollar</option>
+          <option value="KRW">KRW - South Korean Won</option>
+          <option value="JPY">JPY - Japanese yen</option>
         </select>
       </div>
       <div className="mb-8">
@@ -34,7 +53,7 @@ const StepOne = () => {
       <div className="w-full">
         <button
           onClick={() => {
-            switcher();
+            routepusher();
           }}
           class="btn btn-info w-full rounded-3xl text-white bg-[#0166FF]"
         >

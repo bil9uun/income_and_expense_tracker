@@ -1,8 +1,14 @@
 import React from "react";
 
 import Coins from "@/components/svg/Coins";
+import { StepContext } from "@/context/StepContext";
+import { useContext } from "react";
+import { useRouter } from "next/router";
 
 const StepTwo = () => {
+  const dd = useContext(StepContext);
+  console.log("stedata", dd);
+
   return (
     <div className=" w-96 h-80 bg-white flex flex-col justify-center items-center">
       <div className=" flex flex-col justify-center items-center mb-6">
@@ -15,8 +21,13 @@ const StepTwo = () => {
       </div>
       <div className="flex justify-center items-center w-full mb-3">
         <input
-          type="text"
+          name="balance"
+          type="number"
           placeholder="Email"
+          // value={stepData.balance}
+          onChange={(e) => {
+            changeStepData(e.target.name, e.target.value);
+          }}
           class=" bg-[#F3F4F6] text-black input input-bordered input-md w-full"
         />
       </div>
