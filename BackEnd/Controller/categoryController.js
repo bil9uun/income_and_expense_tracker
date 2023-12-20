@@ -1,12 +1,14 @@
 const { sql } = require("../config/pgDb");
 
-const category = async (req, res) => {
+const getAllCategory = async (req, res) => {
   try {
-    await sql`INSERT INTO category (name, description,category_image, category_color) VALUES (${"name"},${"description"},${"category_image"}, ${"category_color"})`;
-    res.status(201).json({ message: "success" });
+    const categories = await sql`SELECT * FROM category`;
+
+    res.status(200).json({ message: "success", categories });
   } catch (error) {
-    res.status(500).json({ message: "amjiltgui bollo" + error });
+    console.log("ERR", error);
+    res.status(500).json({ message: "failed" });
   }
 };
 
-module.exports = { category };
+module.exports = { getAllCategory };

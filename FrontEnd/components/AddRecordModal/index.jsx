@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { TransactionContext } from "@/context/TransactionContext";
+import { useContext } from "react";
 
 import PlusCircle from "../svg/PlusCircle";
 import House from "../svg/House";
@@ -10,7 +12,20 @@ import TShirt from "../svg/TShirt";
 import AddCategoryModal from "../AddCategoryModal";
 
 const AddRecordModal = () => {
+  const [open, setOpen] = useState(false);
   const AddCategorys = [{ iconSVG: "H", text: "House" }];
+  const { transactionData, changeTransactionData, addTransaction } =
+    useContext(TransactionContext);
+
+  const closeForm = () => {
+    setOpen(false);
+  };
+
+  const addRecord = async () => {
+    await addTransaction();
+    console.log("CLOSE");
+    closeForm();
+  };
   return (
     <dialog id="my_modal" className="modal flex justify-center items-center ">
       <div className="modal-box max-w-5xl w-[800px]">
@@ -29,12 +44,28 @@ const AddRecordModal = () => {
           <div className="w-[392px] py-5 px-6">
             <div className="bg-[#F3F4F6] flex rounded-full mb-5">
               <div className="flex-1 justify-center items-center p-0">
-                <button className="btn btn-primary w-full rounded-full text-white">
+                <button
+                  className={`btn w-full rounded-full text-white ${
+                    transactionData.transaction_type === "EXP" &&
+                    "bg-[#0166FF] text-white"
+                  }`}
+                  onClick={() => {
+                    changeTransactionData("transaction_type", "EXP");
+                  }}
+                >
                   Expence
                 </button>
               </div>
               <div className="flex-1">
-                <button className="btn border-0 bg-[#F3F4F6] w-full rounded-full text-[#1F2937]">
+                <button
+                  className={`btn border-0 bg-[#F3F4F6] w-full rounded-full text-[#1F2937] ${
+                    transactionData.transaction_type === "INC" &&
+                    "bg-[#228822] text-white"
+                  }`}
+                  onClick={() => {
+                    changeTransactionData("transaction_type", "INC");
+                  }}
+                >
                   Income
                 </button>
               </div>
@@ -42,8 +73,14 @@ const AddRecordModal = () => {
             <div className="mb-[19px]">
               <h1 className="mb-[5px]">Amount</h1>
               <input
-                type="text"
-                placeholder="₮000.00"
+                type="number"
+                placeholder="₮0"
+                name="amount"
+                value={transactionData.amount}
+                onChange={(e) => {
+                  console.log(e.target.name, e.target.value);
+                  changeTransactionData(e.target.name, e.target.value);
+                }}
                 className="input input-bordered w-full"
               />
             </div>
@@ -57,18 +94,7 @@ const AddRecordModal = () => {
                   tabIndex={0}
                   className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full"
                 >
-                  <li>
-                    <div
-                      onClick={() =>
-                        document.getElementById("my_modal_1").showModal()
-                      }
-                      className="border-b border-solid border[rgba(0, 0, 0, 0.10)]"
-                    >
-                      <PlusCircle />
-                      <AddCategoryModal />
-                      <h1 className="ml-3">Add Category</h1>
-                    </div>
-                  </li>
+                  {/* 
                   <li>
                     <div>
                       <House color="#0166FF" />
@@ -104,39 +130,57 @@ const AddRecordModal = () => {
                       <TShirt />
                       <h1 className="ml-3">Shopping</h1>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
-            <div className="flex mb-8">
-              <div className="mr-3">
-                <h1>Date</h1>
-                <input type="date" className="input input-bordered" />
-              </div>
-              <div>
-                <h1>Date</h1>
-                <input type="date" className="input input-bordered" />
-              </div>
+            <div className="w-full mb-8">
+              <h1>Date</h1>
+              <input
+                type="datetime-local"
+                name="updated_at"
+                className="input input-bordered  w-full"
+                onChange={(e) => {
+                  console.log("updated_at", e.target.value);
+                  changeTransactionData(e.target.name, e.target.value);
+                }}
+              />
             </div>
-            <button className="btn border-0 bg-primary w-full rounded-full text-white">
+            <button
+              className={`btn border-0 bg-primary w-full rounded-full text-white ${
+                transactionData.transaction_type === "INC"
+                  ? "bg-[#228822]"
+                  : "bg-[#0166FF]"
+              }`}
+              onClick={addRecord}
+            >
               Add Record
             </button>
           </div>
           {/* Right */}
           <div className=" w-[348px] py-5 px-6">
             <div className="mb-[19px]">
-              <h1 className="mb-[5px]">Payee</h1>
-              <select className="select select-bordered w-full">
-                <option disabled selected>
-                  Payee
-                </option>
-              </select>
+              <h1 className="mb-[5px]">Name</h1>
+              <input
+                type="text"
+                name="transaction_name"
+                placeholder="Write a name of transaction"
+                value={transactionData.transaction_name}
+                onChange={(e) => {
+                  changeTransactionData(e.target.name, e.target.value);
+                }}
+              />
             </div>
             <div>
               <h1 className="mb-[5px]">Note</h1>
               <textarea
                 className="textarea textarea-bordered w-[316px] h-[305px] p-4"
-                placeholder="Write Here"
+                placeholder="Write a Message"
+                name="description"
+                value={transactionData.description}
+                onChange={(e) => {
+                  changeTransactionData(e.target.name, e.target.value);
+                }}
               ></textarea>
             </div>
           </div>
