@@ -6,6 +6,7 @@ import SoloRecord from "../SoloRecord";
 import axios from "axios";
 
 const RecordsContainer = () => {
+  const [records, setRecords] = [];
   const TodayRecords = [
     {
       title: "Lending & Renting",
@@ -42,8 +43,10 @@ const RecordsContainer = () => {
     const {
       data: { records },
     } = await axios.get("http://localhost:8008/transactions");
-    console.log("RES", records);
+    console.log("records", records);
+    setRecords(records);
   };
+  console.log("records", records);
   return (
     <div className=" w-[846px]">
       {/* Deed 2 */}
