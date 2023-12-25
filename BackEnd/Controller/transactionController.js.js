@@ -6,19 +6,20 @@ const createTransaction = async (req, res) => {
   try {
     console.log("TRANSACTION-POST");
     const {
-      userId,
       categoryId,
       amount,
       transaction_type,
       description,
       transaction_name,
       updated_at,
+      userId,
     } = req.body;
 
     console.log(req.body);
+    console.log(userId, "useridpost");
 
     const data =
-      await sql`INSERT INTO transactions(user_id, category_id, name, amount, description, transaction_type, updated_at) VALUES(${userId}, ${categoryId}, ${transaction_name}, ${amount}, ${description}, ${transaction_type}, ${updated_at}) RETURNING *`;
+      await sql`INSERT INTO transaction(user_id, category_id, name, amount, description, transaction_type, updated_at) VALUES(${userId}, ${categoryId}, ${transaction_name}, ${amount}, ${description}, ${transaction_type}, ${updated_at}) RETURNING *`;
     res.status(201).json({ message: "success", transaction: data[0] });
   } catch (error) {
     console.log("ERR", error);

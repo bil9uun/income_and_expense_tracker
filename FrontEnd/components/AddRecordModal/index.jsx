@@ -1,40 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { TransactionContext } from "@/context/TransactionContext";
-import { useContext } from "react";
+import axios from "axios";
 
-import PlusCircle from "../svg/PlusCircle";
-import House from "../svg/House";
-import Gift from "../svg/Gift";
-import Food from "../svg/Food";
-import Wine from "../svg/Wine";
-import Taxi from "../svg/Taxi";
-import TShirt from "../svg/TShirt";
-import AddCategoryModal from "../AddCategoryModal";
+import RecordIcons from "./RecordIcons";
 
-const AddRecordModal = () => {
-  const [open, setOpen] = useState(false);
-  const AddCategorys = [{ iconSVG: "H", text: "House" }];
+const AddRecordModal = ({ open, closeForm }) => {
+  // const [open, setOpen] = useState(false);
+  const [category, setCategory] = useState([]);
   const { transactionData, changeTransactionData, addTransaction } =
     useContext(TransactionContext);
-
-  const closeForm = () => {
-    setOpen(false);
-  };
 
   const addRecord = async () => {
     await addTransaction();
     console.log("CLOSE");
     closeForm();
+
+    console.log(transactionData.transaction_type, "type");
   };
+  const getCategories = async () => {
+    const {
+      data: { categories },
+    } = await axios.get("http://localhost:8008/categories");
+    console.log("RES", categories);
+    setCategory(categories);
+  };
+
+  useEffect(() => {
+    console.log("CATEFF");
+    getCategories();
+  }, []);
+
   return (
-    <dialog id="my_modal" className="modal flex justify-center items-center ">
+    <dialog open={open} className="modal flex justify-center items-center ">
       <div className="modal-box max-w-5xl w-[800px]">
         <form method="dialog">
           <div className="flex">
             <h1 className=" text-xl font-semibold text-slate-900">
               Add Record
             </h1>
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <button
+              onClick={closeForm}
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
               ✕
             </button>
           </div>
@@ -58,7 +65,7 @@ const AddRecordModal = () => {
               </div>
               <div className="flex-1">
                 <button
-                  className={`btn border-0 bg-[#F3F4F6] w-full rounded-full text-[#1F2937] ${
+                  className={`btn border-0 w-full rounded-full text-[#1F2937] ${
                     transactionData.transaction_type === "INC" &&
                     "bg-[#228822] text-white"
                   }`}
@@ -94,43 +101,10 @@ const AddRecordModal = () => {
                   tabIndex={0}
                   className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-full"
                 >
-                  {/* 
-                  <li>
-                    <div>
-                      <House color="#0166FF" />
-                      <h1 className="ml-3">House</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <Gift />
-                      <h1 className="ml-3">Gift</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <Food />
-                      <h1 className="ml-3">Food</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <Wine />
-                      <h1 className="ml-3">Drink</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <Taxi />
-                      <h1 className="ml-3">Taxi</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <TShirt />
-                      <h1 className="ml-3">Shopping</h1>
-                    </div>
-                  </li> */}
+                  <RecordIcons
+                    changeTransactionData={changeTransactionData}
+                    category={category}
+                  />
                 </ul>
               </div>
             </div>
@@ -147,7 +121,7 @@ const AddRecordModal = () => {
               />
             </div>
             <button
-              className={`btn border-0 bg-primary w-full rounded-full text-white ${
+              className={`btn border-0 w-full rounded-full text-white ${
                 transactionData.transaction_type === "INC"
                   ? "bg-[#228822]"
                   : "bg-[#0166FF]"

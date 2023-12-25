@@ -6,8 +6,11 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 
 const StepTwo = () => {
-  const dd = useContext(StepContext);
-  console.log("stedata", dd);
+  const { changeStepData } = useContext(StepContext);
+  const router = useRouter();
+  const routepusher = () => {
+    router.push("/StepThree");
+  };
 
   return (
     <div className=" w-96 h-80 bg-white flex flex-col justify-center items-center">
@@ -37,7 +40,12 @@ const StepTwo = () => {
         </p>
       </div>
       <div className="w-full">
-        <button class="btn btn-info w-full rounded-3xl text-white bg-[#0166FF]">
+        <button
+          onClick={() => {
+            routepusher();
+          }}
+          class="btn btn-info w-full rounded-3xl text-white bg-[#0166FF]"
+        >
           Confirm
         </button>
       </div>

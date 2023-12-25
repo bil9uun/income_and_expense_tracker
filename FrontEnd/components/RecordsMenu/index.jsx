@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 
 import Plus from "../svg/Plus";
 import MenuCategory from "../MenuCategory";
@@ -18,19 +19,26 @@ const RecordsMenu = () => {
     { name: "Income" },
     { name: "Others" },
   ];
+  const [open, setOpen] = useState(false);
+
+  const closeForm = () => {
+    console.log("Formee");
+    setOpen(false);
+  };
   return (
     <div className="px-4 py-6 bg-white flex flex-col w-[250px] border border-slid border-[#E5E7EB] rounded-[12px] ">
       <h1 className="font-semibold text-2xl mb-6">Records</h1>
       <button
         className="btn btn-primary rounded-full text-white mb-6"
-        onClick={() => document.getElementById("my_modal").showModal()}
+        onClick={() => {
+          setOpen(true);
+        }}
       >
         <Plus color="white" />
         Add
       </button>
-      <div>
-        <AddRecordModal />
-      </div>
+      {open && <AddRecordModal open={open} closeForm={closeForm} />}
+
       <input
         type="text"
         placeholder="Search"

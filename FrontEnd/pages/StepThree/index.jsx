@@ -1,8 +1,14 @@
 import React from "react";
 
 import Check from "@/components/svg/Check";
+import { useRouter } from "next/router";
 
 const StepThree = () => {
+  const router = useRouter();
+  const routepusher = () => {
+    router.push("/");
+  };
+
   return (
     <div className=" w-96 h-80 bg-white flex flex-col justify-center items-center">
       <div className=" flex flex-col justify-center items-center mb-6">
@@ -18,7 +24,12 @@ const StepThree = () => {
         </p>
       </div>
       <div className="w-full">
-        <button class="btn btn-info w-full rounded-3xl text-white bg-[#0166FF]">
+        <button
+          onClick={() => {
+            routepusher();
+          }}
+          class="btn btn-info w-full rounded-3xl text-white bg-[#0166FF]"
+        >
           Go to Dashboard
         </button>
       </div>

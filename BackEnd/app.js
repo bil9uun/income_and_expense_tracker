@@ -15,7 +15,7 @@ app.use(express.json());
 //authentication
 app.use("/auth", authRoutes);
 app.use("/categories/", categoryRoutes);
-app.use("/transaction", transactionRoutes);
+app.use("/transactions", transactionRoutes);
 
 app.use("/api/images", imageRoutes);
 

@@ -3,6 +3,7 @@ import React from "react";
 import ArrowLeft from "../svg/ArrowLeft";
 import ArrowRight from "../svg/ArrowRight";
 import SoloRecord from "../SoloRecord";
+import axios from "axios";
 
 const RecordsContainer = () => {
   const TodayRecords = [
@@ -37,6 +38,12 @@ const RecordsContainer = () => {
       color: "",
     },
   ];
+  const getRecordData = async () => {
+    const {
+      data: { records },
+    } = await axios.get("http://localhost:8008/transactions");
+    console.log("RES", records);
+  };
   return (
     <div className=" w-[846px]">
       {/* Deed 2 */}
