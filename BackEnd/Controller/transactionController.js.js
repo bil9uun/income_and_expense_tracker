@@ -38,4 +38,23 @@ const createTransaction = async (req, res) => {
   }
 };
 
-module.exports = { createTransaction, getAllTransaction };
+const getTotalIncomeExpense = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const data =
+      await sql`SELECT transaction_type, SUM(amount) as total FROM transaction GROUP BY transaction_type`;
+    console.log(data, "datatotal");
+    const exp = data.filter((el) => {
+      el.transaction_type === "EXP";
+    })[0].total;
+    const inc = data.filter((el) => {
+      el.transaction_type === "INC";
+    })[0].total;
+  } catch (error) {}
+};
+
+module.exports = {
+  createTransaction,
+  getAllTransaction,
+  getTotalIncomeExpense,
+};

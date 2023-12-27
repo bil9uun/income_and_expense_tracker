@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import ArrowLeft from "../svg/ArrowLeft";
 import ArrowRight from "../svg/ArrowRight";
 import SoloRecord from "../SoloRecord";
 import axios from "axios";
+import { TransactionContext } from "@/context/TransactionContext";
 
 const RecordsContainer = () => {
-  const [records, setRecords] = [];
+  const [records, setRecords] = useState([]);
+  const { transactions, setTransactions, getTransactions } =
+    useContext(TransactionContext);
   const TodayRecords = [
     {
       title: "Lending & Renting",
@@ -39,14 +42,8 @@ const RecordsContainer = () => {
       color: "",
     },
   ];
-  const getRecordData = async () => {
-    const {
-      data: { records },
-    } = await axios.get("http://localhost:8008/transactions");
-    console.log("records", records);
-    setRecords(records);
-  };
-  console.log("records", records);
+
+  console.log("data", transactions);
   return (
     <div className=" w-[846px]">
       {/* Deed 2 */}
@@ -57,7 +54,10 @@ const RecordsContainer = () => {
             <ArrowLeft />
           </button>
           <p className="mx-4">Last 30 Days</p>
-          <button className="w-8 h-8 flex justify-center items-center bg-base-200 rounded-lg">
+          <button
+            onClick={console.log("records", records)}
+            className="w-8 h-8 flex justify-center items-center bg-base-200 rounded-lg"
+          >
             <ArrowRight />
           </button>
         </div>

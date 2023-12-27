@@ -2,11 +2,13 @@ import React, { createContext, useContext, useState } from "react";
 import { UserContext } from "../UserProvider";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { data } from "autoprefixer";
 
 export const TransactionContext = createContext(null);
 
 const TransactionProvider = ({ children }) => {
   const { user } = useContext(UserContext);
+  const [transactions, setTransactions] = useState({});
   const [transactionData, setTransactionData] = useState({
     transaction_name: "",
     amount: 10000,
@@ -35,9 +37,30 @@ const TransactionProvider = ({ children }) => {
     }
   };
 
+  const getTransactions = async () => {
+    console.log("WORKING");
+    try {
+      const {
+        data: { transactions },
+      } = await axios.get("http://localhost:8008/transactions");
+      console.log("TRA");
+      console.log("hihihi", data);
+      // toast.success("Гүйлгээнүүдийг амжилттай татлаа.");
+      setTransactions(transactions);
+    } catch (error) {
+      console.log("TER", error);
+      toast.error("Гүйлгээг нэмэхэд алдаа гарлаа.");
+    }
+  };
+
   return (
     <TransactionContext.Provider
-      value={{ transactionData, changeTransactionData, addTransaction }}
+      value={{
+        transactionData,
+        changeTransactionData,
+        addTransaction,
+        getTransactions,
+      }}
     >
       {children}
     </TransactionContext.Provider>
