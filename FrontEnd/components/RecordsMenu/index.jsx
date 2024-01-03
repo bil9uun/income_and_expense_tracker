@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TransactionContext } from "@/context/TransactionContext";
 
 import Plus from "../svg/Plus";
 import MenuCategory from "../MenuCategory";
@@ -20,6 +21,9 @@ const RecordsMenu = () => {
     { name: "Others" },
   ];
   const [open, setOpen] = useState(false);
+  const { categories } = useContext(TransactionContext);
+
+  console.log("cats", categories);
 
   const closeForm = () => {
     console.log("Formee");
@@ -80,7 +84,7 @@ const RecordsMenu = () => {
           <h1 className="font-semibold">Category</h1>
           <p className=" text-slate-400">Clear</p>
         </div>
-        {Categorys.map((Category) => {
+        {categories.map((Category) => {
           return <MenuCategory Category={Category} />;
         })}
         <div className="flex items-center mb-2">

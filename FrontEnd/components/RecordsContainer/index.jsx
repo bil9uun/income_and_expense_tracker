@@ -8,40 +8,7 @@ import { TransactionContext } from "@/context/TransactionContext";
 
 const RecordsContainer = () => {
   const [records, setRecords] = useState([]);
-  const { transactions, setTransactions, getTransactions } =
-    useContext(TransactionContext);
-  const TodayRecords = [
-    {
-      title: "Lending & Renting",
-      time: "12:00",
-      amount: "- 1000₮",
-      color: "",
-    },
-    {
-      title: "Food & Drinks",
-      time: "12:00",
-      amount: "- 1000₮",
-      color: "",
-    },
-    {
-      title: "Food & Drinks",
-      time: "12:00",
-      amount: "- 1000₮",
-      color: "",
-    },
-    {
-      title: "Food & Drinks",
-      time: "12:00",
-      amount: "- 1000₮",
-      color: "",
-    },
-    {
-      title: "Food & Drinks",
-      time: "12:00",
-      amount: "- 1000₮",
-      color: "",
-    },
-  ];
+  const { transactions } = useContext(TransactionContext);
 
   console.log("data", transactions);
   return (
@@ -88,17 +55,17 @@ const RecordsContainer = () => {
         {/* Today */}
         <div className="mb-6">
           <h1 className="font-semibold mb-3">Today</h1>
-          {TodayRecords.map((TodayRecord) => (
-            <SoloRecord Record={TodayRecord} />
+          {transactions.map((transaction) => (
+            <SoloRecord transaction={transaction} />
           ))}
         </div>
         {/* Yesterday */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <h1 className="font-semibold mb-3">Yesterday</h1>
-          {TodayRecords.map((TodayRecord) => (
-            <SoloRecord Record={TodayRecord} />
+          {transactions.map((transaction) => (
+            <SoloRecord transaction={transaction} />
           ))}
-        </div>
+        </div> */}
       </div>
     </div>
   );

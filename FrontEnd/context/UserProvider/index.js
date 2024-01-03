@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState("");
 
   const [formUserData, setFormUserData] = useState({
     email: "",
@@ -38,6 +39,7 @@ const UserProvider = ({ children }) => {
       });
       console.log("data.user", data.user);
       setUser(data.user);
+      setUserId(data.user.id);
       router.push("/");
     } catch (error) {
       console.log("error", error);

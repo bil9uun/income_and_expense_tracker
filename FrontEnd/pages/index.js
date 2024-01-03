@@ -11,8 +11,7 @@ import {
 } from "chart.js";
 
 import Navbar from "@/components/Navbar";
-import Noise from "@/components/Noise";
-import Card from "@/components/Card";
+import TopSection from "@/components/TopSection";
 import LastRecords from "@/components/LastRecords";
 
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
@@ -80,10 +79,8 @@ const Home = () => {
     <div className="w-full h-full bg-[#F3F4F6]">
       <Navbar />
       <div className="mx-[120px]">
-        <div className="flex justify-between mt-8">
-          <Noise />
-          <Card />
-          <Card />
+        <div>
+          <TopSection />
         </div>
         <div className="flex justify-evenly">
           <div className="card bg-white flex justify-center items-center p-4">

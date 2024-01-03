@@ -5,7 +5,9 @@ import Wine from "@/components/svg/Wine";
 import Taxi from "@/components/svg/Taxi";
 import TShirt from "@/components/svg/TShirt";
 
-export const getIcons = (iconName = "house", iconColor = "red") => {
+import moment from "moment";
+
+export const getIcons = (iconName = "house", iconColor = "green") => {
   const icons = {
     house: <House color={iconColor} />,
     gift: <Gift color={iconColor} />,
@@ -16,43 +18,11 @@ export const getIcons = (iconName = "house", iconColor = "red") => {
   };
   return icons[iconName];
 };
+export const thousandify = (num) => {
+  console.log(num);
+  return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
+};
 
-{
-  /* 
-                  <li>
-                    <div>
-                      <House color="#'0166FF'" />
-                      <h1 className="ml-3">House</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <Gift />
-                      <h1 className="ml-3">Gift</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <Food />
-                      <h1 className="ml-3">Food</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <Wine />
-                      <h1 className="ml-3">Drink</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <Taxi />
-                      <h1 className="ml-3">Taxi</h1>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <TShirt />
-                      <h1 className="ml-3">Shopping</h1>
-                    </div>
-                  </li> */
-}
+export const dayformat = (day) => {
+  return moment(day).format("MMMM Do YYYY, h:mm:ss a");
+};

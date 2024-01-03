@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { UserContext } from "../UserProvider";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -8,7 +8,7 @@ export const TransactionContext = createContext(null);
 
 const TransactionProvider = ({ children }) => {
   const { user } = useContext(UserContext);
-  const [transactions, setTransactions] = useState({});
+  const [transactions, setTransactions] = useState([]);
   const [transactionData, setTransactionData] = useState({
     transaction_name: "",
     amount: 10000,
@@ -17,6 +17,7 @@ const TransactionProvider = ({ children }) => {
     categoryId: "",
     updated_at: "",
   });
+  const [categories, setCategories] = useState([]);
 
   const changeTransactionData = (key, value) => {
     setTransactionData({ ...transactionData, [key]: value });
@@ -43,9 +44,8 @@ const TransactionProvider = ({ children }) => {
       const {
         data: { transactions },
       } = await axios.get("http://localhost:8008/transactions");
-      console.log("TRA");
-      console.log("hihihi", data);
-      // toast.success("Гүйлгээнүүдийг амжилттай татлаа.");
+      // console.log("TRA");
+      toast.success("Гүйлгээнүүдийг амжилттай татлаа.");
       setTransactions(transactions);
     } catch (error) {
       console.log("TER", error);
@@ -53,13 +53,34 @@ const TransactionProvider = ({ children }) => {
     }
   };
 
+  const getCategories = async () => {
+    console.log("WORKING");
+    try {
+      const {
+        data: { categories },
+      } = await axios.get("http://localhost:8008/categories");
+      // console.log("TRA");
+      toast.success("Гүйлгээнүүдийг амжилттай татлаа.");
+      setCategories(categories);
+    } catch (error) {
+      console.log("TER", error);
+      toast.error("Гүйлгээг нэмэхэд алдаа гарлаа.");
+    }
+  };
+  useEffect(() => {
+    getCategories();
+    getTransactions();
+  }, []);
+
   return (
     <TransactionContext.Provider
       value={{
+        transactions,
+        setTransactions,
         transactionData,
         changeTransactionData,
         addTransaction,
-        getTransactions,
+        categories,
       }}
     >
       {children}
