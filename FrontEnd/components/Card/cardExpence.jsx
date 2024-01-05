@@ -6,7 +6,7 @@ import { thousandify } from "@/utils";
 
 const CardExpence = ({ totalExpense }) => {
   return (
-    <div className="card w-96 bg-base-100 ml-6">
+    <div className="card w-[30%] h-[300px] bg-base-100 ml-6">
       <div className="px-6 py-4 flex justify-center items-center">
         <Ellipse />
         <h1 className="ml-1 font-semibold text-black">Total Expences</h1>

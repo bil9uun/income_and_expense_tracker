@@ -1,16 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Home from "../svg/Home";
 import Ellipse123 from "../svg/Ellipse123";
 import { getIcons, thousandify, dayformat } from "@/utils";
 
 const SoloRecord = ({ transaction }) => {
+  const [isChecked, setIsChecked] = useState("");
+  const [checkedAmount, setCheckedAmount] = useState(0);
+
+  const toggleCheckbox = (a, b) => {
+    console.log("event", a, b);
+    if (isChecked === "") {
+      setIsChecked("checked");
+    }
+    if (isChecked === "checked") {
+      setIsChecked("");
+    }
+  };
   return (
-    <div className="py-3 px-6 bg-white flex items-center justify-between rounded-xl mb-3 border border-solid border-[#E5E7EB]">
+    <div
+      onClick={() => {
+        toggleCheckbox(transaction.amount, transaction.transaction_type);
+      }}
+      className="py-3 px-6 bg-white flex items-center justify-between rounded-xl mb-3 border border-solid border-[#E5E7EB]"
+    >
       <div className="flex jus items-center">
         <input
           type="checkbox"
-          checked="checked"
+          checked={isChecked}
           className="checkbox checkbox-primary mr-4"
         />
         <div className="relative flex justify-center items-center">

@@ -3,10 +3,12 @@ const {
   createTransaction,
   getAllTransaction,
   getTotalIncomeExpense,
+  getChartData,
 } = require("../Controller/transactionController.js");
 
 const router = Router();
 
+router.route("/chartdata/:userId").get(getChartData);
 router.route("/").post(createTransaction).get(getAllTransaction);
 router.route("/total").get(getTotalIncomeExpense);
 

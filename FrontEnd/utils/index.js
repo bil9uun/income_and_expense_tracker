@@ -19,7 +19,6 @@ export const getIcons = (iconName = "house", iconColor = "green") => {
   return icons[iconName];
 };
 export const thousandify = (num) => {
-  console.log(num);
   return num.toLocaleString(undefined, { maximumFractionDigits: 2 });
 };
 

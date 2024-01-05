@@ -11,8 +11,9 @@ import {
 } from "chart.js";
 
 import Navbar from "@/components/Navbar";
-import TopSection from "@/components/TopSection";
+import TopSection from "@/components/HomePageSections/TopSection";
 import LastRecords from "@/components/LastRecords";
+import MiddleSection from "@/components/HomePageSections/MiddleSection";
 
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Legend);
 
@@ -75,6 +76,7 @@ const Home = () => {
       },
     },
   };
+
   return (
     <div className="w-full h-full bg-[#F3F4F6]">
       <Navbar />
@@ -82,13 +84,8 @@ const Home = () => {
         <div>
           <TopSection />
         </div>
-        <div className="flex justify-evenly">
-          <div className="card bg-white flex justify-center items-center p-4">
-            <Bar data={data1} options={options1} />
-          </div>
-          <div className="card bg-white flex justify-center items-center p-4">
-            <Doughnut options={options2} data={data2} />
-          </div>
+        <div className="flex justify-between h-[30%] my-10">
+          <MiddleSection />
         </div>
         <LastRecords />
       </div>
@@ -97,3 +94,12 @@ const Home = () => {
 };
 
 export default Home;
+
+{
+  /* <div className="card bg-white flex w-[48%] justify-center items-center p-4">
+            <Bar data={data1} options={options1} />
+          </div>
+          <div className="card bg-white flex w-[48%] justify-center items-center p-4">
+            <Doughnut options={options2} data={data2} />
+          </div> */
+}

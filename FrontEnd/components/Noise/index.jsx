@@ -6,7 +6,8 @@ import Shape from "../svg/Shape";
 
 const Noise = () => {
   return (
-    <div className=" bg-[url('/img/Noise.png')] w-[384px] h-[219px] rounded-[18px] relative">
+    // bg-[url('/img/Noise.png')]
+    <div className=" bg-gray-400 w-[30%] h-[300px] rounded-[18px] relative">
       <div className="flex items-center absolute left-8 top-8">
         <Logo color="white" />
         <Geld color="white" />

@@ -21,10 +21,7 @@ const RecordsContainer = () => {
             <ArrowLeft />
           </button>
           <p className="mx-4">Last 30 Days</p>
-          <button
-            onClick={console.log("records", records)}
-            className="w-8 h-8 flex justify-center items-center bg-base-200 rounded-lg"
-          >
+          <button className="w-8 h-8 flex justify-center items-center bg-base-200 rounded-lg">
             <ArrowRight />
           </button>
         </div>
