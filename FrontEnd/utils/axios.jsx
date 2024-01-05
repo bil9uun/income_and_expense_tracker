@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_API_URL = "http://localhost:8008/";
+const BASE_API_URL = "https://income-and-expense-tracker.vercel.app/";
 
 const instanceAxios = axios.create({
   // Configuration
