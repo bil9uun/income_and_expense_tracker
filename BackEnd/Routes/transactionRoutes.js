@@ -4,7 +4,7 @@ const {
   getAllTransaction,
   getTotalIncomeExpense,
   getChartData,
-} = require("../Controller/transactionController.js");
+} = require("../Controller/transactionController.js.js");
 
 const router = Router();
 
