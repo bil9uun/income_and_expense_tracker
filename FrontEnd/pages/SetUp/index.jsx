@@ -1,9 +1,7 @@
 import React from "react";
 
 import StepOne from "@/pages/StepOne";
-import StepTwo from "@/pages/StepTwo";
-import StepThree from "@/pages/StepThree";
-import StepsContainer from "@/components/LogIn/StepsContainer";
+
 import Logo from "@/components/svg/Logo";
 import Geld from "@/components/svg/Geld";
 
@@ -15,7 +13,6 @@ const SetUp = () => {
           <Logo />
           <Geld />
         </div>
-        <StepsContainer />
       </div>
       <StepOne />
       {/* <StepTwo /> */}
