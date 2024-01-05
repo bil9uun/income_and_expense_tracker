@@ -3,7 +3,6 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import ArrowLeft from "../svg/ArrowLeft";
 import ArrowRight from "../svg/ArrowRight";
 import SoloRecord from "../SoloRecord";
-import axios from "axios";
 import { TransactionContext } from "@/context/TransactionContext";
 
 const RecordsContainer = () => {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { TransactionContext } from "@/context/TransactionContext";
-import axios from "axios";
 
 import RecordIcons from "./RecordIcons";
+import instanceAxios from "@/utils/axios";
 
 const AddRecordModal = ({ open, closeForm }) => {
   // const [open, setOpen] = useState(false);
@@ -20,7 +20,7 @@ const AddRecordModal = ({ open, closeForm }) => {
   const getCategories = async () => {
     const {
       data: { categories },
-    } = await axios.get("http://localhost:8008/categories");
+    } = await instanceAxios.get("http://localhost:8008/categories");
     console.log("RES", categories);
     setCategory(categories);
   };

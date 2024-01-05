@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import Home from "../svg/Home";
-import Ellipse123 from "../svg/Ellipse123";
 import { getIcons, thousandify, dayformat } from "@/utils";
 
 const SoloRecord = ({ transaction }) => {

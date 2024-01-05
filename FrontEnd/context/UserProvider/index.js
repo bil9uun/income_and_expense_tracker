@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import instanceAxios from "@/utils/axios";
 
 export const UserContext = createContext();
 
@@ -33,10 +33,13 @@ const UserProvider = ({ children }) => {
     }
     try {
       setLoading(true);
-      const { data } = await axios.post("http://localhost:8008/auth/logIn", {
-        userEmail: formUserData.email,
-        userPassword: formUserData.password,
-      });
+      const { data } = await instanceAxios.post(
+        "http://localhost:8008/auth/logIn",
+        {
+          userEmail: formUserData.email,
+          userPassword: formUserData.password,
+        }
+      );
       console.log("data.user", data.user);
       setUser(data.user);
       setUserId(data.user.id);
@@ -69,11 +72,14 @@ const UserProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await axios.post("http://localhost:8008/auth/signup", {
-        email: formUserData.email,
-        password: formUserData.password,
-        name: formUserData.name,
-      });
+      const { data } = await instanceAxios.post(
+        "http://localhost:8008/auth/signup",
+        {
+          email: formUserData.email,
+          password: formUserData.password,
+          name: formUserData.name,
+        }
+      );
       console.log(data);
       setUser(data.user);
       router.push("/step-one");

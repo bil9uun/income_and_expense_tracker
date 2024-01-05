@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { UserContext } from "../UserProvider";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { data } from "autoprefixer";
+import instanceAxios from "@/utils/axios";
 
 export const TransactionContext = createContext(null);
 
@@ -28,10 +28,13 @@ const TransactionProvider = ({ children }) => {
     console.log("DATA", transactionData);
     console.log("USER", user);
     try {
-      const { data } = await axios.post("http://localhost:8008/transactions", {
-        ...transactionData,
-        userId: "22e7e357-8b12-4bd2-952e-33586a423080",
-      });
+      const { data } = await instanceAxios.post(
+        "http://localhost:8008/transactions",
+        {
+          ...transactionData,
+          userId: "22e7e357-8b12-4bd2-952e-33586a423080",
+        }
+      );
       toast.success("Гүйлгээг амжилттай нэмлээ.");
     } catch (error) {
       toast.error("Гүйлгээг нэмэхэд алдаа гарлаа.");
@@ -43,7 +46,7 @@ const TransactionProvider = ({ children }) => {
     try {
       const {
         data: { transactions },
-      } = await axios.get("http://localhost:8008/transactions");
+      } = await instanceAxios.get("http://localhost:8008/transactions");
       // console.log("TRA");
       toast.success("Гүйлгээнүүдийг амжилттай татлаа.");
       setTransactions(transactions);
@@ -58,7 +61,7 @@ const TransactionProvider = ({ children }) => {
     try {
       const {
         data: { categories },
-      } = await axios.get("http://localhost:8008/categories");
+      } = await instanceAxios.get("http://localhost:8008/categories");
       // console.log("TRA");
       toast.success("Гүйлгээнүүдийг амжилттай татлаа.");
       setCategories(categories);
