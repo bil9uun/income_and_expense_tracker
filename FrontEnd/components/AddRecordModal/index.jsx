@@ -20,7 +20,7 @@ const AddRecordModal = ({ open, closeForm }) => {
   const getCategories = async () => {
     const {
       data: { categories },
-    } = await instanceAxios.get("http://localhost:8008/categories");
+    } = await instanceAxios.get("/categories");
     console.log("RES", categories);
     setCategory(categories);
   };

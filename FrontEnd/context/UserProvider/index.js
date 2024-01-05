@@ -33,13 +33,10 @@ const UserProvider = ({ children }) => {
     }
     try {
       setLoading(true);
-      const { data } = await instanceAxios.post(
-        "http://localhost:8008/auth/logIn",
-        {
-          userEmail: formUserData.email,
-          userPassword: formUserData.password,
-        }
-      );
+      const { data } = await instanceAxios.post("/auth/logIn", {
+        userEmail: formUserData.email,
+        userPassword: formUserData.password,
+      });
       console.log("data.user", data.user);
       setUser(data.user);
       setUserId(data.user.id);
@@ -72,14 +69,11 @@ const UserProvider = ({ children }) => {
     }
 
     try {
-      const { data } = await instanceAxios.post(
-        "http://localhost:8008/auth/signup",
-        {
-          email: formUserData.email,
-          password: formUserData.password,
-          name: formUserData.name,
-        }
-      );
+      const { data } = await instanceAxios.post("/auth/signup", {
+        email: formUserData.email,
+        password: formUserData.password,
+        name: formUserData.name,
+      });
       console.log(data);
       setUser(data.user);
       router.push("/step-one");

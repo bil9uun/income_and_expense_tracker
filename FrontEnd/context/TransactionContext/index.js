@@ -28,13 +28,10 @@ const TransactionProvider = ({ children }) => {
     console.log("DATA", transactionData);
     console.log("USER", user);
     try {
-      const { data } = await instanceAxios.post(
-        "http://localhost:8008/transactions",
-        {
-          ...transactionData,
-          userId: "22e7e357-8b12-4bd2-952e-33586a423080",
-        }
-      );
+      const { data } = await instanceAxios.post("/transactions", {
+        ...transactionData,
+        userId: "22e7e357-8b12-4bd2-952e-33586a423080",
+      });
       toast.success("Гүйлгээг амжилттай нэмлээ.");
     } catch (error) {
       toast.error("Гүйлгээг нэмэхэд алдаа гарлаа.");
@@ -46,7 +43,7 @@ const TransactionProvider = ({ children }) => {
     try {
       const {
         data: { transactions },
-      } = await instanceAxios.get("http://localhost:8008/transactions");
+      } = await instanceAxios.get("/transactions");
       // console.log("TRA");
       toast.success("Гүйлгээнүүдийг амжилттай татлаа.");
       setTransactions(transactions);
@@ -61,7 +58,7 @@ const TransactionProvider = ({ children }) => {
     try {
       const {
         data: { categories },
-      } = await instanceAxios.get("http://localhost:8008/categories");
+      } = await instanceAxios.get("/categories");
       // console.log("TRA");
       toast.success("Гүйлгээнүүдийг амжилттай татлаа.");
       setCategories(categories);
